@@ -255,20 +255,28 @@
     .site-nav {
       position: fixed;
       z-index: 10000;
-      top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(1200px, calc(100% - 28px));
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      box-shadow: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .site-nav.scrolled {
+      border-bottom: 1px solid rgba(23, 21, 20, 0.08);
+      box-shadow: 0 4px 20px rgba(23, 21, 20, 0.04);
+    }
+
+    .site-nav-inner {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px 10px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      background: rgba(251, 248, 243, 0.84);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-radius: 999px;
-      box-shadow: 0 16px 40px rgba(23, 21, 20, 0.08);
+      padding: 12px 0;
+      position: relative;
     }
 
     .brand {
@@ -3565,8 +3573,14 @@
       }
 
       .site-nav {
-        top: 10px;
-        width: calc(100% - 16px);
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .site-nav-inner {
+        width: calc(100% - 24px);
+        padding: 10px 0;
       }
 
       .hero {
@@ -3767,54 +3781,56 @@
 <body>
   <!-- Site Navigation Header -->
   <header class="site-nav" id="siteNav">
-    <a href="#home" class="brand" aria-label="Skin Atlas Home">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M12 3.2C9.2 7.25 6.6 9.75 6.6 13.5A5.4 5.4 0 0 0 12 18.9a5.4 5.4 0 0 0 5.4-5.4C17.4 9.75 14.8 7.25 12 3.2Z"
-            fill="#bfd8c3" />
-          <circle cx="12" cy="13.1" r="2.55" fill="#171514" />
-          <path d="M12 10.55v5.1M9.45 13.1h5.1" stroke="#bfd8c3" stroke-width=".9" stroke-linecap="round" />
-        </svg>
-      </span>
-      <span class="brand-name"><span class="brand-bold">SKIN</span><span class="brand-accent">ATLAS</span></span>
-    </a>
-
-    <!-- Navigation Menu Wrapper (Desktop inline, Mobile dropdown inside Hamburger) -->
-    <div class="nav-menu-wrapper" id="navMenuWrapper">
-      <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
-        <a href="#home" class="active">Home</a>
-        <a href="#explore">Explore</a>
-        <a href="#treatments">Treatments</a>
-        <a href="#creators">Creators</a>
-        <a href="#map">Map</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <!-- Buttons placed inside the Hamburger Menu for Mobile & Tablet -->
-      <div class="menu-buttons-mobile" id="menuButtonsMobile">
-        <a href="#gallery-shelf" class="saved-pill mobile-btn" id="savedNavMobile" aria-label="View Saved Shortlist">
-          <span>Saved Shortlist</span>
-          <span class="saved-count-badge">0</span>
-        </a>
-        <a class="btn primary sm mobile-btn" href="#explore">Explore now ↗</a>
-      </div>
-    </div>
-
-    <!-- Desktop CTA Buttons (Visible on desktop > 900px, hidden on mobile/tablet) -->
-    <div class="nav-cta desktop-cta">
-      <a href="#gallery-shelf" class="saved-pill" id="savedNav" aria-label="View Saved Shortlist">
-        <span>Saved</span>
-        <span class="saved-count-badge" id="savedCount">0</span>
+    <div class="site-nav-inner">
+      <a href="#home" class="brand" aria-label="Skin Atlas Home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M12 3.2C9.2 7.25 6.6 9.75 6.6 13.5A5.4 5.4 0 0 0 12 18.9a5.4 5.4 0 0 0 5.4-5.4C17.4 9.75 14.8 7.25 12 3.2Z"
+              fill="#bfd8c3" />
+            <circle cx="12" cy="13.1" r="2.55" fill="#171514" />
+            <path d="M12 10.55v5.1M9.45 13.1h5.1" stroke="#bfd8c3" stroke-width=".9" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span class="brand-name"><span class="brand-bold">SKIN</span><span class="brand-accent">ATLAS</span></span>
       </a>
-      <a class="btn primary sm" href="#explore">Explore now</a>
-    </div>
 
-    <!-- Hamburger Menu Button (Visible on mobile/tablet <= 900px) -->
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
-      <span class="menu-icon" id="menuIcon">☰</span>
-    </button>
+      <!-- Navigation Menu Wrapper (Desktop inline, Mobile dropdown inside Hamburger) -->
+      <div class="nav-menu-wrapper" id="navMenuWrapper">
+        <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+          <a href="#home" class="active">Home</a>
+          <a href="#explore">Explore</a>
+          <a href="#treatments">Treatments</a>
+          <a href="#creators">Creators</a>
+          <a href="#map">Map</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Buttons placed inside the Hamburger Menu for Mobile & Tablet -->
+        <div class="menu-buttons-mobile" id="menuButtonsMobile">
+          <a href="#gallery-shelf" class="saved-pill mobile-btn" id="savedNavMobile" aria-label="View Saved Shortlist">
+            <span>Saved Shortlist</span>
+            <span class="saved-count-badge">0</span>
+          </a>
+          <a class="btn primary sm mobile-btn" href="#explore">Explore now ↗</a>
+        </div>
+      </div>
+
+      <!-- Desktop CTA Buttons (Visible on desktop > 900px, hidden on mobile/tablet) -->
+      <div class="nav-cta desktop-cta">
+        <a href="#gallery-shelf" class="saved-pill" id="savedNav" aria-label="View Saved Shortlist">
+          <span>Saved</span>
+          <span class="saved-count-badge" id="savedCount">0</span>
+        </a>
+        <a class="btn primary sm" href="#explore">Explore now</a>
+      </div>
+
+      <!-- Hamburger Menu Button (Visible on mobile/tablet <= 900px) -->
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="menu-icon" id="menuIcon">☰</span>
+      </button>
+    </div>
   </header>
 
   <main>
@@ -5660,14 +5676,23 @@
     }
 
     let navRaf = null;
+    function updateHeaderScrolled() {
+      const siteNav = document.getElementById('siteNav');
+      if (siteNav) {
+        siteNav.classList.toggle('scrolled', window.scrollY > 15);
+      }
+    }
+
     window.addEventListener('scroll', () => {
       if (!navRaf) {
         navRaf = requestAnimationFrame(() => {
           updateActiveNav();
+          updateHeaderScrolled();
           navRaf = null;
         });
       }
     }, { passive: true });
+    updateHeaderScrolled();
 
     /* Mobile menu toggle */
     const menuBtn = document.getElementById('menuBtn');
